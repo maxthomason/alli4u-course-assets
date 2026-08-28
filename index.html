@@ -7,8 +7,8 @@
   <style>
     :root {
       --sidebar-bg: #ffffff;
-      --header-bg: #f5f5f5;
-      --border-color: #e0e0e0;
+      --header-bg: #f3f3f3;
+      --border-color: #e8e8e8;
       --text-main: #333333;
       --text-muted: #616161;
       --text-bright: #000000;
@@ -28,29 +28,22 @@
     html, body {
       width: 100%;
       height: 100%;
-      background-color: #f7f9fa;
+      background-color: var(--sidebar-bg);
       font-family: var(--font-ui);
       color: var(--text-main);
       font-size: 13px;
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      padding: 20px;
+      overflow: hidden;
+      padding: 0;
     }
 
-    /* Cropped Explorer Container with padding & card styling */
+    /* Edge-to-edge Explorer Container */
     .explorer-container {
-      width: 300px;
-      max-width: 100%;
-      height: fit-content;
-      max-height: calc(100vh - 40px);
+      width: 100%;
+      height: 100vh;
       background-color: var(--sidebar-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
       display: flex;
       flex-direction: column;
-      overflow: hidden;
+      position: relative;
     }
 
     /* Explorer Header */
@@ -77,17 +70,17 @@
       flex: 1;
       overflow-y: auto;
       overflow-x: hidden;
-      padding-top: 6px;
-      padding-bottom: 8px;
+      padding-top: 4px;
+      padding-bottom: 12px;
     }
 
     .tree-view::-webkit-scrollbar {
-      width: 6px;
+      width: 8px;
     }
 
     .tree-view::-webkit-scrollbar-thumb {
       background: #cccccc;
-      border-radius: 3px;
+      border-radius: 4px;
     }
 
     /* Tree Item Styling */
@@ -95,7 +88,7 @@
       display: flex;
       align-items: center;
       height: 24px;
-      padding-right: 12px;
+      padding-right: 8px;
       cursor: pointer;
       position: relative;
       white-space: nowrap;
