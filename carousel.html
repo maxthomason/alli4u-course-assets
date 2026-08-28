@@ -10,10 +10,10 @@
   <style>
     :root {
       --sidebar-bg: #ffffff;
-      --header-bg: #f3f3f3;
-      --border-color: #e0e0e0;
-      --text-main: #222222;
-      --text-muted: #555555;
+      --header-bg: #f8f8f8;
+      --border-color: #e5e5e5;
+      --text-main: #333333;
+      --text-muted: #616161;
       --text-bright: #000000;
       --hover-bg: #f0f0f0;
       --active-bg: #e4e6f1;
@@ -32,131 +32,131 @@
     html, body {
       width: 100%;
       min-height: 100vh;
-      background-color: var(--sidebar-bg);
+      background-color: #ffffff;
       font-family: var(--font-body);
       color: var(--text-main);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      padding: 0;
+      padding: 12px;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Outer Wrapper Container */
-    .carousel-app {
+    /* Outer Shell Matching Mindsmith Reference Card */
+    .outer-card {
       width: 100%;
-      height: 100vh;
+      max-width: 380px;
+      background-color: #f5f5f5;
+      border-radius: 16px;
+      padding: 12px;
       display: flex;
       flex-direction: column;
       position: relative;
-      background-color: var(--sidebar-bg);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
     }
 
-    /* Floating Round Navigation Buttons */
-    .carousel-floating-nav {
-      position: absolute;
-      top: 14px;
-      right: 14px;
-      z-index: 100;
+    /* Top Inner White Card Box for Interactive Tree Viewer */
+    .inner-white-card {
+      background-color: #ffffff;
+      border-radius: 12px;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
       display: flex;
-      align-items: center;
-      gap: 8px;
+      flex-direction: column;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
     }
 
+    /* Vertically Centered Circular Arrow Buttons */
     .circle-btn {
-      width: 32px;
-      height: 32px;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
-      background-color: #717171;
+      background-color: rgba(110, 110, 110, 0.85);
       color: #ffffff;
       border: none;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      z-index: 50;
       transition: background 0.15s, transform 0.1s;
     }
 
     .circle-btn:hover:not(:disabled) {
-      background-color: #555555;
-      transform: scale(1.05);
+      background-color: rgba(60, 60, 60, 0.95);
+      transform: translateY(-50%) scale(1.08);
     }
 
     .circle-btn:disabled {
-      opacity: 0.35;
+      opacity: 0.25;
       cursor: not-allowed;
-      transform: none;
+      transform: translateY(-50%);
+    }
+
+    .circle-btn.left-btn {
+      left: 8px;
+    }
+
+    .circle-btn.right-btn {
+      right: 8px;
     }
 
     .circle-btn svg {
-      width: 14px;
-      height: 14px;
+      width: 12px;
+      height: 12px;
       fill: currentColor;
     }
 
-    /* Content Cards & Descriptions */
+    /* Bottom Centered Pill Slide Indicators */
+    .slide-indicators-pill {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(120, 120, 120, 0.7);
+      border-radius: 12px;
+      padding: 4px 8px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      z-index: 50;
+    }
+
+    .dot-indicator {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .dot-indicator.active {
+      width: 16px;
+      border-radius: 3px;
+      background-color: #ffffff;
+    }
+
+    /* Slides */
     .carousel-slide {
       display: none;
-      flex-direction: column;
-      height: 100vh;
       width: 100%;
-      animation: fadeIn 0.2s ease-in-out;
+      flex-direction: column;
     }
 
     .carousel-slide.active {
       display: flex;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    /* Text Description Box in Inter font */
-    .desc-box {
-      background: #ffffff;
-      border-bottom: 1px solid var(--border-color);
-      padding: 16px 20px;
-      padding-right: 90px; /* Space for floating round buttons */
-      line-height: 1.55;
-      flex-shrink: 0;
-    }
-
-    .desc-title {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--text-bright);
-      margin-bottom: 6px;
-    }
-
-    .desc-text {
-      font-size: 13px;
-      color: var(--text-main);
-    }
-
-    .desc-quote {
-      margin-top: 8px;
-      padding-left: 10px;
-      border-left: 3px solid var(--accent-blue);
-      font-style: italic;
-      color: var(--text-muted);
-      font-size: 12px;
-    }
-
-    /* Folder Viewer Container */
-    .folder-card {
-      background-color: var(--sidebar-bg);
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
-
+    /* Folder Header & Tree Elements */
     .sidebar-header {
-      height: 38px;
-      padding: 0 14px;
+      height: 36px;
+      padding: 0 12px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -173,20 +173,20 @@
     }
 
     .tree-view {
-      flex: 1;
       padding-top: 6px;
-      padding-bottom: 12px;
+      padding-bottom: 28px; /* Extra bottom clearance for dot indicators */
+      height: 380px;
       overflow-y: auto;
       overflow-x: hidden;
     }
 
     .tree-view::-webkit-scrollbar {
-      width: 8px;
+      width: 6px;
     }
 
     .tree-view::-webkit-scrollbar-thumb {
       background: #cccccc;
-      border-radius: 4px;
+      border-radius: 3px;
     }
 
     .tree-item {
@@ -253,6 +253,29 @@
       text-overflow: ellipsis;
     }
 
+    /* Bottom Text Area Matching Reference Style */
+    .description-area {
+      margin-top: 12px;
+      padding: 2px 4px;
+      font-size: 13px;
+      line-height: 1.5;
+      color: #222222;
+    }
+
+    .description-text {
+      display: none;
+    }
+
+    .description-text.active {
+      display: block;
+    }
+
+    .description-text b {
+      font-weight: 700;
+      color: #111111;
+    }
+
+    /* Tooltip */
     .custom-tooltip {
       position: absolute;
       background: #ffffff;
@@ -271,95 +294,76 @@
 </head>
 <body>
 
-  <div class="carousel-app">
+  <!-- Outer Card Shell -->
+  <div class="outer-card">
 
-    <!-- Floating Round Navigation Buttons (Attachment 1 style) -->
-    <div class="carousel-floating-nav">
-      <button class="circle-btn" id="prevBtn" onclick="navigateSlide(-1)" title="Previous Layout">
+    <!-- Inner White Card Box -->
+    <div class="inner-white-card">
+
+      <!-- Left / Right Circle Arrows -->
+      <button class="circle-btn left-btn" id="prevBtn" onclick="navigateSlide(-1)" title="Previous">
         <svg viewBox="0 0 16 16"><path d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/></svg>
       </button>
-      <button class="circle-btn" id="nextBtn" onclick="navigateSlide(1)" title="Next Layout">
+
+      <button class="circle-btn right-btn" id="nextBtn" onclick="navigateSlide(1)" title="Next">
         <svg viewBox="0 0 16 16"><path d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>
       </button>
-    </div>
 
-    <!-- SLIDE 1: DEFAULT -->
-    <div class="carousel-slide active" id="slide-0">
-      <div class="desc-box">
-        <h3 class="desc-title">Default Alli4U Workspace Architecture</h3>
-        <p class="desc-text">
-          Your workspace is not just a filing cabinet—it is the agent’s operational memory. <code>.agents</code> and <code>.vscode</code> establish the core agent configuration files. <code>01_knowledge_base</code> houses durable customer rules and naming specs, while <code>planning/</code> keeps active scratchpads contained.
-        </p>
-        <div class="desc-quote">
-          "The agent navigates by reading, not by clicking. Consistent structure is the difference between an AI system that works reliably and one that strays."
-        </div>
-      </div>
-
-      <div class="folder-card">
+      <!-- SLIDE 0: DEFAULT -->
+      <div class="carousel-slide active" id="slide-0">
         <div class="sidebar-header">
           <span class="sidebar-title">ALLI4U</span>
         </div>
         <div class="tree-view" id="tree-0"></div>
       </div>
-    </div>
 
-    <!-- SLIDE 2: MEDIA -->
-    <div class="carousel-slide" id="slide-1">
-      <div class="desc-box">
-        <h3 class="desc-title">Client-Isolated Media Trafficker Layout</h3>
-        <p class="desc-text">
-          For media traffickers managing multiple ad accounts, grouping <code>01_knowledge_base</code> and <code>planning</code> directly inside each client folder under <code>projects/</code> guarantees that account-specific targeting boundaries and campaign naming specs remain isolated during social trafficking.
-        </p>
-        <div class="desc-quote">
-          "What lives in the client directory shapes everything the agent can do. Isolating rules per client folder prevents cross-contamination across ad accounts."
-        </div>
-      </div>
-
-      <div class="folder-card">
+      <!-- SLIDE 1: MEDIA -->
+      <div class="carousel-slide" id="slide-1">
         <div class="sidebar-header">
           <span class="sidebar-title">ALLI4U - MEDIA</span>
         </div>
         <div class="tree-view" id="tree-1"></div>
       </div>
-    </div>
 
-    <!-- SLIDE 3: STRATEGIST -->
-    <div class="carousel-slide" id="slide-2">
-      <div class="desc-box">
-        <h3 class="desc-title">Insights & Media Mix Planning Layout</h3>
-        <p class="desc-text">
-          Strategists organize their memory around <code>research/</code>, <code>strategies/</code>, and <code>reporting/</code>. By keeping consumer benchmarks, media mix models, and QBR drafts cleanly structured alongside <code>.agents</code>, AI agents can draft strategic briefs and query historical performance without wading through code artifacts.
-        </p>
-        <div class="desc-quote">
-          "Your folders are the memory. Clear categorization allows AI models to synthesize market trends and media mix models instantly."
-        </div>
-      </div>
-
-      <div class="folder-card">
+      <!-- SLIDE 2: STRATEGIST -->
+      <div class="carousel-slide" id="slide-2">
         <div class="sidebar-header">
           <span class="sidebar-title">ALLI4U - STRATEGIST</span>
         </div>
         <div class="tree-view" id="tree-2"></div>
       </div>
-    </div>
 
-    <!-- SLIDE 4: PEOPLE & CULTURE -->
-    <div class="carousel-slide" id="slide-3">
-      <div class="desc-box">
-        <h3 class="desc-title">HR & Talent Operations Architecture</h3>
-        <p class="desc-text">
-          People & Culture team members tailor their workspace around <code>onboarding/</code>, <code>policies/</code>, <code>training/</code>, and <code>engagement/</code>. The agent reads handbook guidelines directly from disk to answer employee inquiries, generate 30-60-90 day plans, and automate leave catch-up summaries.
-        </p>
-        <div class="desc-quote">
-          "The system does not need a separate database. Structured folders allow agents to act as interactive knowledge guides for company policies and onboarding."
-        </div>
-      </div>
-
-      <div class="folder-card">
+      <!-- SLIDE 3: PEOPLE -->
+      <div class="carousel-slide" id="slide-3">
         <div class="sidebar-header">
           <span class="sidebar-title">ALLI4U - PEOPLE & CULTURE</span>
         </div>
         <div class="tree-view" id="tree-3"></div>
+      </div>
+
+      <!-- Bottom Center Slide Dots Indicator Pill -->
+      <div class="slide-indicators-pill">
+        <div class="dot-indicator active" onclick="goToSlide(0)"></div>
+        <div class="dot-indicator" onclick="goToSlide(1)"></div>
+        <div class="dot-indicator" onclick="goToSlide(2)"></div>
+        <div class="dot-indicator" onclick="goToSlide(3)"></div>
+      </div>
+
+    </div>
+
+    <!-- Description Text Area Matching Reference Style -->
+    <div class="description-area">
+      <div class="description-text active" id="desc-0">
+        <b>default</b> — standard baseline workspace architecture. Your folders are the agent's operational memory—<code>.agents</code> and <code>.vscode</code> configure global directives, <code>01_knowledge_base</code> holds durable customer rules, and <code>planning</code> keeps active work isolated.
+      </div>
+      <div class="description-text" id="desc-1">
+        <b>media</b> — client-isolated ad operations layout. Keeps <code>01_knowledge_base</code> and <code>planning</code> directly inside each client folder under <code>projects</code> so campaign rules and targeting specs remain separate during social trafficking.
+      </div>
+      <div class="description-text" id="desc-2">
+        <b>strategist</b> — insights and media planning structure. Organizes workspace memory around <code>research</code>, <code>strategies</code>, and <code>reporting</code> so AI models can synthesize consumer trends and media mix models instantly.
+      </div>
+      <div class="description-text" id="desc-3">
+        <b>people</b> — HR and talent operations workspace. Groups <code>onboarding</code>, <code>policies</code>, <code>training</code>, and <code>engagement</code> into structured folders so agents can answer employee questions and automate onboarding checklists directly from disk.
       </div>
     </div>
 
@@ -517,6 +521,14 @@
       currentSlide = slideIndex;
       document.querySelectorAll(".carousel-slide").forEach((slide, idx) => {
         slide.classList.toggle("active", idx === slideIndex);
+      });
+
+      document.querySelectorAll(".description-text").forEach((desc, idx) => {
+        desc.classList.toggle("active", idx === slideIndex);
+      });
+
+      document.querySelectorAll(".dot-indicator").forEach((dot, idx) => {
+        dot.classList.toggle("active", idx === slideIndex);
       });
 
       document.getElementById("prevBtn").disabled = currentSlide === 0;
