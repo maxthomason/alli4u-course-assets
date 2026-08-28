@@ -33,7 +33,7 @@
       width: 100%;
       height: 100%;
       min-height: 100vh;
-      background-color: #ffffff;
+      background-color: #f5f5f5;
       font-family: var(--font-body);
       color: var(--text-main);
       display: flex;
@@ -45,16 +45,17 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Outer Shell Expands 100% Horizontally to Fit Mindsmith Canvas Box */
+    /* Outer Shell Expands 100% Full Width Across Mindsmith Iframe Canvas */
     .outer-card {
       width: 100%;
       max-width: 100%;
       min-height: 100vh;
       background-color: #f5f5f5;
-      padding: 16px 48px 16px 48px; /* Gutters for circular navigation arrows */
+      padding: 16px 52px 16px 52px; /* Side gutters for arrows so arrows float outside white box */
       display: flex;
       flex-direction: column;
       position: relative;
+      flex: 1;
     }
 
     /* Top Inner White Card Box for Interactive Tree Viewer */
@@ -70,10 +71,10 @@
       flex: 1;
     }
 
-    /* Vertically Centered Circular Arrow Buttons in Side Gutters */
+    /* Vertically Centered Circular Arrow Buttons Positioned in Side Gutters */
     .circle-btn {
       position: absolute;
-      top: 50%;
+      top: 200px;
       transform: translateY(-50%);
       width: 28px;
       height: 28px;
@@ -101,11 +102,11 @@
     }
 
     .circle-btn.left-btn {
-      left: 10px;
+      left: 12px;
     }
 
     .circle-btn.right-btn {
-      right: 10px;
+      right: 12px;
     }
 
     .circle-btn svg {
