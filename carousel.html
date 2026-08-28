@@ -31,29 +31,30 @@
 
     html, body {
       width: 100%;
+      height: 100%;
       min-height: 100vh;
       background-color: #ffffff;
       font-family: var(--font-body);
       color: var(--text-main);
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: stretch;
       justify-content: flex-start;
-      padding: 12px;
+      padding: 0;
+      margin: 0;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Outer Shell Matching Mindsmith Reference Card with Side Gutters for Arrows */
+    /* Outer Shell Expands 100% Horizontally to Fit Mindsmith Canvas Box */
     .outer-card {
       width: 100%;
-      max-width: 400px;
+      max-width: 100%;
+      min-height: 100vh;
       background-color: #f5f5f5;
-      border-radius: 16px;
-      padding: 12px 34px; /* Side padding so arrows sit completely outside inner white card */
+      padding: 16px 48px 16px 48px; /* Gutters for circular navigation arrows */
       display: flex;
       flex-direction: column;
       position: relative;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
     }
 
     /* Top Inner White Card Box for Interactive Tree Viewer */
@@ -66,15 +67,16 @@
       display: flex;
       flex-direction: column;
       box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+      flex: 1;
     }
 
-    /* Circular Arrow Buttons Positioned OUTSIDE the Folder Bounding Box */
+    /* Vertically Centered Circular Arrow Buttons in Side Gutters */
     .circle-btn {
       position: absolute;
-      top: 200px; /* Vertically aligned near middle of folder tree box */
+      top: 50%;
       transform: translateY(-50%);
-      width: 26px;
-      height: 26px;
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
       background-color: rgba(110, 110, 110, 0.85);
       color: #ffffff;
@@ -99,11 +101,11 @@
     }
 
     .circle-btn.left-btn {
-      left: 4px; /* Outside white card in left gutter */
+      left: 10px;
     }
 
     .circle-btn.right-btn {
-      right: 4px; /* Outside white card in right gutter */
+      right: 10px;
     }
 
     .circle-btn svg {
@@ -146,7 +148,9 @@
     .carousel-slide {
       display: none;
       width: 100%;
+      height: 100%;
       flex-direction: column;
+      flex: 1;
     }
 
     .carousel-slide.active {
@@ -155,13 +159,14 @@
 
     /* Folder Header & Tree Elements */
     .sidebar-header {
-      height: 36px;
-      padding: 0 12px;
+      height: 38px;
+      padding: 0 14px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       border-bottom: 1px solid var(--border-color);
       background-color: var(--header-bg);
+      flex-shrink: 0;
     }
 
     .sidebar-title {
@@ -175,7 +180,8 @@
     .tree-view {
       padding-top: 6px;
       padding-bottom: 28px; /* Extra bottom clearance for dot indicators */
-      height: 380px;
+      flex: 1;
+      min-height: 280px;
       overflow-y: auto;
       overflow-x: hidden;
     }
@@ -199,6 +205,7 @@
       white-space: nowrap;
       color: var(--text-main);
       font-size: 13px;
+      width: 100%;
     }
 
     .tree-item:hover {
@@ -255,11 +262,13 @@
 
     /* Bottom Text Area Matching Reference Style */
     .description-area {
-      margin-top: 12px;
+      margin-top: 14px;
       padding: 2px 0px;
       font-size: 13px;
       line-height: 1.5;
       color: #222222;
+      width: 100%;
+      flex-shrink: 0;
     }
 
     .description-text {
