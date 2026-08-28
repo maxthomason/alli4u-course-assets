@@ -43,13 +43,13 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Outer Shell Matching Mindsmith Reference Card */
+    /* Outer Shell Matching Mindsmith Reference Card with Side Gutters for Arrows */
     .outer-card {
       width: 100%;
-      max-width: 380px;
+      max-width: 400px;
       background-color: #f5f5f5;
       border-radius: 16px;
-      padding: 12px;
+      padding: 12px 34px; /* Side padding so arrows sit completely outside inner white card */
       display: flex;
       flex-direction: column;
       position: relative;
@@ -68,13 +68,13 @@
       box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
     }
 
-    /* Vertically Centered Circular Arrow Buttons */
+    /* Circular Arrow Buttons Positioned OUTSIDE the Folder Bounding Box */
     .circle-btn {
       position: absolute;
-      top: 50%;
+      top: 200px; /* Vertically aligned near middle of folder tree box */
       transform: translateY(-50%);
-      width: 28px;
-      height: 28px;
+      width: 26px;
+      height: 26px;
       border-radius: 50%;
       background-color: rgba(110, 110, 110, 0.85);
       color: #ffffff;
@@ -99,11 +99,11 @@
     }
 
     .circle-btn.left-btn {
-      left: 8px;
+      left: 4px; /* Outside white card in left gutter */
     }
 
     .circle-btn.right-btn {
-      right: 8px;
+      right: 4px; /* Outside white card in right gutter */
     }
 
     .circle-btn svg {
@@ -256,7 +256,7 @@
     /* Bottom Text Area Matching Reference Style */
     .description-area {
       margin-top: 12px;
-      padding: 2px 4px;
+      padding: 2px 0px;
       font-size: 13px;
       line-height: 1.5;
       color: #222222;
@@ -297,17 +297,17 @@
   <!-- Outer Card Shell -->
   <div class="outer-card">
 
+    <!-- Left / Right Circle Arrows OUTSIDE Inner White Box -->
+    <button class="circle-btn left-btn" id="prevBtn" onclick="navigateSlide(-1)" title="Previous">
+      <svg viewBox="0 0 16 16"><path d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/></svg>
+    </button>
+
+    <button class="circle-btn right-btn" id="nextBtn" onclick="navigateSlide(1)" title="Next">
+      <svg viewBox="0 0 16 16"><path d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>
+    </button>
+
     <!-- Inner White Card Box -->
     <div class="inner-white-card">
-
-      <!-- Left / Right Circle Arrows -->
-      <button class="circle-btn left-btn" id="prevBtn" onclick="navigateSlide(-1)" title="Previous">
-        <svg viewBox="0 0 16 16"><path d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/></svg>
-      </button>
-
-      <button class="circle-btn right-btn" id="nextBtn" onclick="navigateSlide(1)" title="Next">
-        <svg viewBox="0 0 16 16"><path d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>
-      </button>
 
       <!-- SLIDE 0: DEFAULT -->
       <div class="carousel-slide active" id="slide-0">
