@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- CacheBuster: 1787929165 -->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -49,7 +50,7 @@
       width: 100%;
       min-height: 100vh;
       background-color: #f5f5f5;
-      padding: 12px 44px 16px 44px; /* Side gutters for circular navigation arrows */
+      padding: 12px 44px 16px 44px;
       display: flex;
       flex-direction: column;
       position: relative;
@@ -60,7 +61,7 @@
       background-color: #ffffff;
       border-radius: 12px;
       width: 100%;
-      height: 255px;
+      height: 240px;
       position: relative;
       overflow: hidden;
       display: flex;
@@ -72,7 +73,7 @@
     /* Vertically Centered Circular Arrow Buttons */
     .circle-btn {
       position: absolute;
-      top: 128px; /* Vertically centered on white folder card */
+      top: 120px;
       transform: translateY(-50%);
       width: 28px;
       height: 28px;
@@ -177,8 +178,8 @@
 
     .tree-view {
       padding-top: 4px;
-      padding-bottom: 20px; /* Clearance for dot indicators */
-      height: 220px;
+      padding-bottom: 20px;
+      height: 205px;
       overflow-y: auto;
       overflow-x: hidden;
     }
@@ -257,30 +258,32 @@
       text-overflow: ellipsis;
     }
 
-    /* 21px Prominent Description Text Area */
+    /* Forced 21px Large Description Text Style */
     .description-area {
-      margin-top: 14px;
-      padding: 0px 4px;
-      font-size: 21px;
-      line-height: 1.5;
-      color: #1a1a1a;
-      width: 100%;
-      flex: 1;
-      font-weight: 500;
+      margin-top: 14px !important;
+      padding: 0px 4px !important;
+      font-size: 21px !important;
+      line-height: 1.5 !important;
+      color: #1a1a1a !important;
+      width: 100% !important;
+      flex: 1 !important;
+      font-weight: 500 !important;
     }
 
     .description-text {
       display: none;
+      font-size: 21px !important;
+      line-height: 1.5 !important;
     }
 
     .description-text.active {
-      display: block;
+      display: block !important;
     }
 
     .description-text b {
-      font-weight: 700;
-      color: #000000;
-      font-size: 21px;
+      font-weight: 700 !important;
+      color: #000000 !important;
+      font-size: 21px !important;
     }
 
     /* Tooltip */
@@ -359,19 +362,19 @@
 
     </div>
 
-    <!-- 21px Description Text Area -->
-    <div class="description-area">
-      <div class="description-text active" id="desc-0">
-        <b>default</b> — standard baseline workspace architecture. Your folders are the agent's operational memory—<code>.agents</code> and <code>.vscode</code> configure global directives, <code>01_knowledge_base</code> holds durable customer rules, and <code>planning</code> keeps active work isolated.
+    <!-- Forced 21px Description Text Area -->
+    <div class="description-area" style="font-size:21px !important; line-height:1.5 !important;">
+      <div class="description-text active" id="desc-0" style="font-size:21px !important;">
+        <b style="font-size:21px !important;">default</b> — standard baseline workspace architecture. Your folders are the agent's operational memory—<code>.agents</code> and <code>.vscode</code> configure global directives, <code>01_knowledge_base</code> holds durable customer rules, and <code>planning</code> keeps active work isolated.
       </div>
-      <div class="description-text" id="desc-1">
-        <b>media</b> — client-isolated ad operations layout. Keeps <code>01_knowledge_base</code> and <code>planning</code> directly inside each client folder under <code>projects</code> so campaign rules and targeting specs remain separate during social trafficking.
+      <div class="description-text" id="desc-1" style="font-size:21px !important;">
+        <b style="font-size:21px !important;">media</b> — client-isolated ad operations layout. Keeps <code>01_knowledge_base</code> and <code>planning</code> directly inside each client folder under <code>projects</code> so campaign rules and targeting specs remain separate during social trafficking.
       </div>
-      <div class="description-text" id="desc-2">
-        <b>strategist</b> — insights and media planning structure. Organizes workspace memory around <code>research</code>, <code>strategies</code>, and <code>reporting</code> so AI models can synthesize consumer trends and media mix models instantly.
+      <div class="description-text" id="desc-2" style="font-size:21px !important;">
+        <b style="font-size:21px !important;">strategist</b> — insights and media planning structure. Organizes workspace memory around <code>research</code>, <code>strategies</code>, and <code>reporting</code> so AI models can synthesize consumer trends and media mix models instantly.
       </div>
-      <div class="description-text" id="desc-3">
-        <b>people</b> — HR and talent operations workspace. Groups <code>onboarding</code>, <code>policies</code>, <code>training</code>, and <code>engagement</code> into structured folders so agents can answer employee questions and automate onboarding checklists directly from disk.
+      <div class="description-text" id="desc-3" style="font-size:21px !important;">
+        <b style="font-size:21px !important;">people</b> — HR and talent operations workspace. Groups <code>onboarding</code>, <code>policies</code>, <code>training</code>, and <code>engagement</code> into structured folders so agents can answer employee questions and automate onboarding checklists directly from disk.
       </div>
     </div>
 
