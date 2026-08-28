@@ -19,9 +19,7 @@
       --active-bg: #e4e6f1;
       --active-text: #000000;
       --accent-blue: #0066b8;
-      --card-bg: #ffffff;
       --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      --font-mono: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace;
     }
 
     * {
@@ -34,103 +32,77 @@
     html, body {
       width: 100%;
       min-height: 100vh;
-      background-color: #f7f9fa;
+      background-color: var(--sidebar-bg);
       font-family: var(--font-body);
       color: var(--text-main);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      padding: 16px;
+      padding: 0;
       -webkit-font-smoothing: antialiased;
     }
 
     /* Outer Wrapper Container */
     .carousel-app {
       width: 100%;
-      max-width: 640px;
+      height: 100vh;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      position: relative;
+      background-color: var(--sidebar-bg);
     }
 
-    /* Top Control & Navigation Header */
-    .carousel-header {
-      background: #ffffff;
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 12px 16px;
+    /* Floating Round Navigation Buttons */
+    .carousel-floating-nav {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      z-index: 100;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      gap: 8px;
     }
 
-    .carousel-nav-btn {
-      background: #ffffff;
-      border: 1px solid #cccccc;
-      border-radius: 6px;
-      padding: 6px 12px;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text-main);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.15s ease;
-      font-family: inherit;
-    }
-
-    .carousel-nav-btn:hover:not(:disabled) {
-      background: #f0f0f0;
-      border-color: #b0b0b0;
-      color: var(--text-bright);
-    }
-
-    .carousel-nav-btn:disabled {
-      opacity: 0.4;
-      cursor: not-allowed;
-    }
-
-    .carousel-indicators {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .indicator-pill {
-      padding: 5px 10px;
-      border-radius: 20px;
-      font-size: 11px;
-      font-weight: 600;
-      background: #f0f0f0;
-      color: var(--text-muted);
-      cursor: pointer;
-      transition: all 0.15s ease;
-      border: 1px solid transparent;
-    }
-
-    .indicator-pill:hover {
-      background: #e5e5e5;
-      color: var(--text-bright);
-    }
-
-    .indicator-pill.active {
-      background: var(--accent-blue);
+    .circle-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background-color: #717171;
       color: #ffffff;
-      border-color: var(--accent-blue);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      transition: background 0.15s, transform 0.1s;
+    }
+
+    .circle-btn:hover:not(:disabled) {
+      background-color: #555555;
+      transform: scale(1.05);
+    }
+
+    .circle-btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .circle-btn svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
     }
 
     /* Content Cards & Descriptions */
     .carousel-slide {
       display: none;
       flex-direction: column;
-      gap: 12px;
-      animation: fadeIn 0.25s ease-in-out;
+      height: 100vh;
+      width: 100%;
+      animation: fadeIn 0.2s ease-in-out;
     }
 
     .carousel-slide.active {
@@ -138,31 +110,18 @@
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(4px); }
-      to { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     /* Text Description Box in Inter font */
     .desc-box {
       background: #ffffff;
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 16px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      border-bottom: 1px solid var(--border-color);
+      padding: 16px 20px;
+      padding-right: 90px; /* Space for floating round buttons */
       line-height: 1.55;
-    }
-
-    .desc-badge {
-      display: inline-block;
-      padding: 3px 8px;
-      background: rgba(0, 102, 184, 0.1);
-      color: var(--accent-blue);
-      border-radius: 4px;
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 8px;
+      flex-shrink: 0;
     }
 
     .desc-title {
@@ -178,7 +137,7 @@
     }
 
     .desc-quote {
-      margin-top: 10px;
+      margin-top: 8px;
       padding-left: 10px;
       border-left: 3px solid var(--accent-blue);
       font-style: italic;
@@ -189,12 +148,10 @@
     /* Folder Viewer Container */
     .folder-card {
       background-color: var(--sidebar-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-      overflow: hidden;
+      flex: 1;
       display: flex;
       flex-direction: column;
+      overflow: hidden;
     }
 
     .sidebar-header {
@@ -216,19 +173,20 @@
     }
 
     .tree-view {
+      flex: 1;
       padding-top: 6px;
       padding-bottom: 12px;
-      max-height: 480px;
       overflow-y: auto;
+      overflow-x: hidden;
     }
 
     .tree-view::-webkit-scrollbar {
-      width: 6px;
+      width: 8px;
     }
 
     .tree-view::-webkit-scrollbar-thumb {
       background: #cccccc;
-      border-radius: 3px;
+      border-radius: 4px;
     }
 
     .tree-item {
@@ -315,28 +273,19 @@
 
   <div class="carousel-app">
 
-    <!-- Carousel Nav Header -->
-    <div class="carousel-header">
-      <button class="carousel-nav-btn" id="prevBtn" onclick="navigateSlide(-1)">
-        &#10094; Prev
+    <!-- Floating Round Navigation Buttons (Attachment 1 style) -->
+    <div class="carousel-floating-nav">
+      <button class="circle-btn" id="prevBtn" onclick="navigateSlide(-1)" title="Previous Layout">
+        <svg viewBox="0 0 16 16"><path d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/></svg>
       </button>
-
-      <div class="carousel-indicators">
-        <span class="indicator-pill active" onclick="goToSlide(0)">1. Default</span>
-        <span class="indicator-pill" onclick="goToSlide(1)">2. Media</span>
-        <span class="indicator-pill" onclick="goToSlide(2)">3. Strategist</span>
-        <span class="indicator-pill" onclick="goToSlide(3)">4. People & Culture</span>
-      </div>
-
-      <button class="carousel-nav-btn" id="nextBtn" onclick="navigateSlide(1)">
-        Next &#10095;
+      <button class="circle-btn" id="nextBtn" onclick="navigateSlide(1)" title="Next Layout">
+        <svg viewBox="0 0 16 16"><path d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>
       </button>
     </div>
 
     <!-- SLIDE 1: DEFAULT -->
     <div class="carousel-slide active" id="slide-0">
       <div class="desc-box">
-        <span class="desc-badge">Standard Baseline</span>
         <h3 class="desc-title">Default Alli4U Workspace Architecture</h3>
         <p class="desc-text">
           Your workspace is not just a filing cabinet—it is the agent’s operational memory. <code>.agents</code> and <code>.vscode</code> establish the core agent configuration files. <code>01_knowledge_base</code> houses durable customer rules and naming specs, while <code>planning/</code> keeps active scratchpads contained.
@@ -357,7 +306,6 @@
     <!-- SLIDE 2: MEDIA -->
     <div class="carousel-slide" id="slide-1">
       <div class="desc-box">
-        <span class="desc-badge">Media Operations</span>
         <h3 class="desc-title">Client-Isolated Media Trafficker Layout</h3>
         <p class="desc-text">
           For media traffickers managing multiple ad accounts, grouping <code>01_knowledge_base</code> and <code>planning</code> directly inside each client folder under <code>projects/</code> guarantees that account-specific targeting boundaries and campaign naming specs remain isolated during social trafficking.
@@ -378,7 +326,6 @@
     <!-- SLIDE 3: STRATEGIST -->
     <div class="carousel-slide" id="slide-2">
       <div class="desc-box">
-        <span class="desc-badge">Strategy & Insights</span>
         <h3 class="desc-title">Insights & Media Mix Planning Layout</h3>
         <p class="desc-text">
           Strategists organize their memory around <code>research/</code>, <code>strategies/</code>, and <code>reporting/</code>. By keeping consumer benchmarks, media mix models, and QBR drafts cleanly structured alongside <code>.agents</code>, AI agents can draft strategic briefs and query historical performance without wading through code artifacts.
@@ -399,7 +346,6 @@
     <!-- SLIDE 4: PEOPLE & CULTURE -->
     <div class="carousel-slide" id="slide-3">
       <div class="desc-box">
-        <span class="desc-badge">People & Culture</span>
         <h3 class="desc-title">HR & Talent Operations Architecture</h3>
         <p class="desc-text">
           People & Culture team members tailor their workspace around <code>onboarding/</code>, <code>policies/</code>, <code>training/</code>, and <code>engagement/</code>. The agent reads handbook guidelines directly from disk to answer employee inquiries, generate 30-60-90 day plans, and automate leave catch-up summaries.
@@ -571,10 +517,6 @@
       currentSlide = slideIndex;
       document.querySelectorAll(".carousel-slide").forEach((slide, idx) => {
         slide.classList.toggle("active", idx === slideIndex);
-      });
-
-      document.querySelectorAll(".indicator-pill").forEach((pill, idx) => {
-        pill.classList.toggle("active", idx === slideIndex);
       });
 
       document.getElementById("prevBtn").disabled = currentSlide === 0;
